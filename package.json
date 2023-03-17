@@ -1,6 +1,6 @@
 {
   "name": "themed-props",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Theme-aware style props for Styled Components",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
