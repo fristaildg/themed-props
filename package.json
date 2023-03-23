@@ -9,6 +9,7 @@
     "dist"
   ],
   "scripts": {
+    "dev": "rollup -c --watch",
     "build": "npm run clean && rollup -c",
     "clean": "rimraf dist",
     "test": "jest",

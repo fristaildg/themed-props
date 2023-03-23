@@ -1,10 +1,16 @@
 import { css } from 'styled-components';
-import { ThemedCSSProp } from './types';
-import { setCSSFromArray } from './utils';
+import { generateCSSfromProps } from './utils';
+
+export const shadowProps = ['$boxShadow', '$textShadow'];
 
 export const shadow = css`
-  box-shadow: ${({ $boxShadow, theme }: ThemedCSSProp) =>
-    setCSSFromArray(theme, 'shadows', $boxShadow)};
-  text-shadow: ${({ $textShadow, theme }: ThemedCSSProp) =>
-    setCSSFromArray(theme, 'shadows', $textShadow)};
+  ${({ theme, ...props }) => {
+    return generateCSSfromProps({
+      props,
+      theme,
+      scale: 'shadows',
+      scaleProps: shadowProps,
+      isOrdinalScale: true,
+    });
+  }}
 `;

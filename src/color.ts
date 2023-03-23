@@ -1,10 +1,16 @@
 import { css } from 'styled-components';
 import { ThemedCSSProp } from './types';
-import { setCSSValue } from './utils';
+import { generateCSSfromProps } from './utils';
+
+export const colorProps = ['$backgroundColor', '$color'];
 
 export const color = css`
-  background-color: ${({ $backgroundColor, theme }: ThemedCSSProp) =>
-    setCSSValue(theme, 'colors', $backgroundColor)};
-  color: ${({ $color, theme }: ThemedCSSProp) =>
-    setCSSValue(theme, 'colors', $color)};
+  ${({ theme, ...props }: ThemedCSSProp) => {
+    return generateCSSfromProps({
+      props,
+      theme,
+      scale: 'colors',
+      scaleProps: colorProps,
+    });
+  }}
 `;

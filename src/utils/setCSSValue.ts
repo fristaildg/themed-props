@@ -1,8 +1,12 @@
 import { Scale, Theme } from '../types';
 
-export const setCSSValue = (theme: Theme, scale: Scale, prop?: string) => {
+export const setCSSValue = (
+  theme: Theme,
+  scale: Scale,
+  prop?: string | number,
+) => {
   if (prop) {
-    const [scaleName, scalePositon] = prop.split('.');
+    const [scaleName, scalePositon] = prop.toString().split('.');
 
     return theme[scale][scaleName]
       ? scalePositon
