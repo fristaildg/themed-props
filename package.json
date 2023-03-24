@@ -26,6 +26,14 @@
   ],
   "author": "Luis Gines Fernandez",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fristaildg/themed-props/issues"
+  },
+  "homepage": "https://github.com/fristaildg/themed-props#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fristaildg/themed-props.git"
+  },
   "devDependencies": {
     "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
