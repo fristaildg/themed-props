@@ -19,7 +19,6 @@ export const size = css`
       theme,
       scale: 'sizes',
       scaleProps: sizeProps,
-      isOrdinalScale: true,
       unit: 'px',
     });
   }}

@@ -25,6 +25,11 @@ export type Theme = {
 export type ColorProps = {
   $backgroundColor?: string;
   $color?: string;
+  $borderColor?: string;
+  $borderTopColor?: string;
+  $borderRightColor?: string;
+  $borderLeftColor?: string;
+  $borderBottomColor?: string;
 };
 
 export type SpaceProps = {

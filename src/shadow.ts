@@ -10,7 +10,6 @@ export const shadow = css`
       theme,
       scale: 'shadows',
       scaleProps: shadowProps,
-      isOrdinalScale: true,
     });
   }}
 `;

@@ -11,7 +11,6 @@ export const position = css`
       theme,
       scale: 'space',
       scaleProps: positionProps,
-      isOrdinalScale: true,
       unit: 'px',
     });
   }}

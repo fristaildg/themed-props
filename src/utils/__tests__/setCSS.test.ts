@@ -1,5 +1,13 @@
-import { setCSSValue, setCSSFromArray } from '../setCSSValue';
+import { setCSSValue, setCSSFromArray } from '../setCSS';
 import defaultTheme from '../../mockTheme';
+
+describe('setCSS', () => {
+  describe('if "prop" is not passed', () => {
+    it('should return undefined', () => {
+      expect(setCSSValue(defaultTheme, 'colors')).toBe(undefined);
+    });
+  });
+});
 
 describe('setCSSValue', () => {
   describe('if "prop" is not passed', () => {
@@ -52,12 +60,6 @@ describe('setCSSFromArray', () => {
 
       it('should return undefined if there is no matching index', () => {
         expect(setCSSFromArray(defaultTheme, 'space', 10)).toBe(undefined);
-      });
-    });
-
-    describe('and it is of type string', () => {
-      it('should return whatever is being passed to "prop"', () => {
-        expect(setCSSFromArray(defaultTheme, 'space', '3rem')).toBe('3rem');
       });
     });
   });

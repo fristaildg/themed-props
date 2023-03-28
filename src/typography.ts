@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 import { ThemedCSSProp } from './types';
-import { setCSSFromArray, setCSSValue } from './utils';
+import { setCSS } from './utils';
 
 export const typography = css`
   ${({
@@ -11,15 +11,10 @@ export const typography = css`
     $letterSpacing,
     $fontFamily,
   }: ThemedCSSProp) => css`
-    font-size: ${setCSSFromArray(theme, 'fontSizes', $fontSize, 'px')};
-    font-weight: ${setCSSFromArray(theme, 'fontWeights', $fontWeight)};
-    line-height: ${setCSSFromArray(theme, 'lineHeights', $lineHeight)};
-    letter-spacing: ${setCSSFromArray(
-      theme,
-      'letterSpacings',
-      $letterSpacing,
-      'px',
-    )};
-    font-family: ${setCSSValue(theme, 'fonts', $fontFamily)};
+    font-size: ${setCSS(theme, 'fontSizes', $fontSize, 'px')};
+    font-weight: ${setCSS(theme, 'fontWeights', $fontWeight)};
+    line-height: ${setCSS(theme, 'lineHeights', $lineHeight)};
+    letter-spacing: ${setCSS(theme, 'letterSpacings', $letterSpacing, 'px')};
+    font-family: ${setCSS(theme, 'fonts', $fontFamily)};
   `}
 `;

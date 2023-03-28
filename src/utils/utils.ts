@@ -1,5 +1,5 @@
 import { Scale, Theme } from '../types';
-import { setCSSFromArray, setCSSValue } from './setCSSValue';
+import { setCSS } from './setCSS';
 
 export const propToCSS = (prop: string) => {
   // transform the transcient $camelCase prop to kebab-case and slice the "$" from the beginning so that it is used as a CSS prop ($backgroundColor -> background-color)
@@ -20,7 +20,6 @@ type Config = {
   scaleProps: string[];
   theme: Theme;
   scale: Scale;
-  isOrdinalScale?: boolean;
   unit?: string;
 };
 
@@ -29,15 +28,10 @@ export const generateCSSfromProps = ({
   scaleProps,
   theme,
   scale,
-  isOrdinalScale,
   unit,
 }: Config) => {
   return filterProps(props, scaleProps).map(
     ([key, value]) =>
-      `${propToCSS(key)}: ${
-        isOrdinalScale
-          ? setCSSFromArray(theme, scale, value, unit)
-          : setCSSValue(theme, scale, value)
-      };`,
+      `${propToCSS(key)}: ${setCSS(theme, scale, value, unit)};`,
   );
 };

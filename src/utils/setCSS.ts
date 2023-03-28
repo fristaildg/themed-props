@@ -1,5 +1,19 @@
 import { Scale, Theme } from '../types';
 
+export const setCSS = (
+  theme: Theme,
+  scale: Scale,
+  prop?: string | number,
+  unit?: string,
+) => {
+  if (prop && typeof prop === 'number')
+    return setCSSFromArray(theme, scale, prop, unit);
+
+  if (prop && typeof prop === 'string') return setCSSValue(theme, scale, prop);
+
+  return undefined;
+};
+
 export const setCSSValue = (
   theme: Theme,
   scale: Scale,
@@ -26,10 +40,6 @@ export const setCSSFromArray = (
 ) => {
   if (prop && typeof prop === 'number') {
     return theme[scale][prop] && `${theme[scale][prop]}${unit ?? ''}`;
-  }
-
-  if (prop && typeof prop === 'string') {
-    return prop;
   }
 
   return undefined;
