@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 import { ThemedCSSProp } from './types';
-import { setCSS } from './utils';
+import { generateCSSRule } from './utils';
 
 export const typography = css`
   ${({
@@ -10,11 +10,57 @@ export const typography = css`
     $lineHeight,
     $letterSpacing,
     $fontFamily,
-  }: ThemedCSSProp) => css`
-    font-size: ${setCSS(theme, 'fontSizes', $fontSize, 'px')};
-    font-weight: ${setCSS(theme, 'fontWeights', $fontWeight)};
-    line-height: ${setCSS(theme, 'lineHeights', $lineHeight)};
-    letter-spacing: ${setCSS(theme, 'letterSpacings', $letterSpacing, 'px')};
-    font-family: ${setCSS(theme, 'fonts', $fontFamily)};
-  `}
+    $textAlign,
+    $fontStyle,
+  }: ThemedCSSProp) => [
+    generateCSSRule({
+      prop: $fontSize,
+      targetCSS: ['font-size'],
+      theme,
+      scale: 'fontSizes',
+      unit: 'px',
+    }),
+    generateCSSRule({
+      prop: $fontWeight,
+      targetCSS: ['font-weight'],
+      theme,
+      scale: 'fontWeights',
+    }),
+    generateCSSRule({
+      prop: $lineHeight,
+      targetCSS: ['line-height'],
+      theme,
+      scale: 'lineHeights',
+    }),
+    generateCSSRule({
+      prop: $letterSpacing,
+      targetCSS: ['letter-spacing'],
+      theme,
+      scale: 'letterSpacings',
+      unit: 'px',
+    }),
+    generateCSSRule({
+      prop: $letterSpacing,
+      targetCSS: ['letter-spacing'],
+      theme,
+      scale: 'letterSpacings',
+      unit: 'px',
+    }),
+    generateCSSRule({
+      prop: $fontFamily,
+      targetCSS: ['font-family'],
+      theme,
+      scale: 'fonts',
+    }),
+    generateCSSRule({
+      prop: $textAlign,
+      targetCSS: ['text-align'],
+      theme,
+    }),
+    generateCSSRule({
+      prop: $fontStyle,
+      targetCSS: ['font-style'],
+      theme,
+    }),
+  ]}
 `;

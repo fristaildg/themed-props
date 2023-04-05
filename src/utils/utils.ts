@@ -15,11 +15,39 @@ export const filterProps = (
   );
 };
 
-type Config = {
+type CSSRuleConfig = {
+  prop: string | number;
+  targetCSS: string[];
+  theme: Theme;
+  scale?: Scale;
+  unit?: string;
+};
+
+export const generateCSSRule = ({
+  prop,
+  targetCSS,
+  theme,
+  scale,
+  unit,
+}: CSSRuleConfig) => {
+  if (prop) {
+    return targetCSS.map((targetCSS) => {
+      if (Array.isArray(prop)) {
+        return setResponsiveCSS(targetCSS, theme, scale, prop, unit);
+      }
+
+      return `${targetCSS}: ${setCSS(theme, scale, prop, unit)};`;
+    });
+  }
+
+  return undefined;
+};
+
+type CSSArrayConfig = {
   props: Record<string, string | number>;
   scaleProps: string[];
   theme: Theme;
-  scale: Scale;
+  scale?: Scale;
   unit?: string;
 };
 
@@ -29,9 +57,41 @@ export const generateCSSfromProps = ({
   theme,
   scale,
   unit,
-}: Config) => {
-  return filterProps(props, scaleProps).map(
-    ([key, value]) =>
-      `${propToCSS(key)}: ${setCSS(theme, scale, value, unit)};`,
-  );
+}: CSSArrayConfig) => {
+  return filterProps(props, scaleProps).map(([key, value]) => {
+    if (Array.isArray(value)) {
+      return setResponsiveCSS(propToCSS(key), theme, scale, value, unit);
+    }
+
+    return `${propToCSS(key)}: ${setCSS(theme, scale, value, unit)};`;
+  });
 };
+
+function setResponsiveCSS(
+  cssRule: string,
+  theme: Theme,
+  scale?: Scale,
+  value?: string | number[],
+  unit?: string,
+) {
+  const mediaQueries = theme['breakpoints'].map(
+    (breakpoint: number, index: number) => {
+      const breakpointValue = value && value[index + 1];
+
+      if (breakpointValue) {
+        return `
+          @media screen and (min-width: ${breakpoint}px) {
+            ${cssRule}: ${setCSS(theme, scale, breakpointValue, unit)};
+          }
+        `;
+      }
+    },
+  );
+
+  return [
+    `
+      ${cssRule}: ${setCSS(theme, scale, value && value[0], unit)};
+    `,
+    ...mediaQueries,
+  ];
+}

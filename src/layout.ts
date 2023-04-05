@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 import { ThemedCSSProp } from './types';
 import { generateCSSfromProps } from './utils';
 
-export const sizeProps = [
+export const layoutProps = [
   '$width',
   '$height',
   '$maxWidth',
@@ -10,15 +10,20 @@ export const sizeProps = [
   '$minWidth',
   '$minHeight',
   '$size',
+  '$display',
+  '$verticalAlign',
+  '$overflow',
+  '$overflowX',
+  '$overflowY',
 ];
 
-export const size = css`
+export const layout = css`
   ${({ theme, ...props }: ThemedCSSProp) => {
     return generateCSSfromProps({
       props,
       theme,
       scale: 'sizes',
-      scaleProps: sizeProps,
+      scaleProps: layoutProps,
       unit: 'px',
     });
   }}

@@ -2,7 +2,14 @@ import { css } from 'styled-components';
 import { ThemedCSSProp } from './types';
 import { generateCSSfromProps } from './utils';
 
-export const positionProps = ['$top', '$left', '$bottom', '$right'];
+export const positionProps = [
+  '$top',
+  '$left',
+  '$bottom',
+  '$right',
+  '$position',
+  '$zIndex',
+];
 
 export const position = css`
   ${({ theme, ...props }: ThemedCSSProp) => {

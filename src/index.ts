@@ -1,8 +1,12 @@
 export { color, colorProps } from './color';
 export { space, spaceProps } from './space';
 export { typography } from './typography';
-export { size } from './size';
+export { layout } from './layout';
 export { position } from './position';
 export { shadow } from './shadow';
+export { flexbox } from './flexbox';
+export { grid } from './grid';
+export { background } from './background';
+export { border } from './border';
 export { pseudoClass } from './pseudoClass';
 export * from './types';

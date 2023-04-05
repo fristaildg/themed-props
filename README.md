@@ -39,7 +39,7 @@ Now you can pass [`trascient` props](https://styled-components.com/docs/faqs#tra
 <Box $marginTop={1} $paddingY={2} $backgroundColor="primary" />
 ```
 
-The values `1` and `2` are tied specifically to your theme specification of the `spaces` scale, you can also pass any valid css value like `'15px'` or `'1rem'`, though the idea of this library is to leverage your Theme scales and keep your layout consistent.
+The values `1` and `2` are tied specifically to your theme specification of the `spaces` scale, you can also pass any valid css value like `'15px'` or `'1rem'`, though the idea of this library is to leverage your Theme scales and keep your layout consistent rather than passing arbitrary CSS.
 
 ## Theme scales
 
@@ -56,6 +56,8 @@ const theme = {
 }
 ```
 
+> Any scale can be ordinal or object-based. Themed Props will detect the shape of the scale and parse the values accordingly. What you have to follow though, is the names of the different scales that are recognized by Themed Props. You can check out the list of scales [here](src/mockTheme.ts)
+
 You could also have an array of values `theme.colors.primary`, like
 
 ```js
@@ -71,6 +73,12 @@ In this case, you would reference any of these values from it's position in the 
 <Button $color="primary.2" />
 ```
 
-> For a complete list of scales and how they should be created, take a look at the sample theme file in [`src/mockTheme`](src/mockTheme.ts) in this repo
+## Pseudo classes
+
+Themed Props supports styling some pseudo classes, especifically `hover`, `active`, `visited`, `focus`, `focus-within` and `focus-visible`. Just pass the transcient prop that corresponds to the pseudo-class you want to style, an object of nested style transcient props, like so:
+
+```jsx
+<Component $backgroundColor="primary.1" $hover={{ $backgroundColor: 'primary.2' }} />
+```
 
 Made with Love!! ❤️
