@@ -22,6 +22,7 @@ const fonts = {
 
 const space = [0, 4, 8, 16, 24, 32, 40, 48, 66, 74];
 const sizes = [...space, 128, 256];
+
 const fontSizes = space;
 const letterSpacings = space;
 const fontWeights = [0, 200, 300, 400, 600, 700, 800, 900];
@@ -37,6 +38,17 @@ const shadows = [
   '0px 7px 30px rgba(0, 0, 0, 0.08), 0px 22px 30px 2px rgba(0, 0, 0, 0.15), 0px 8px 10px rgba(0, 0, 0, 0.15);',
   '0px 9px 46px 8px rgba(0, 0, 0, 0.12), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 11px 15px rgba(0, 0, 0, 0.2);',
 ];
+const borders = {
+  regular: '1px solid',
+  thick: '2px solid',
+  dashed: '1px dashed',
+};
+const breakpoints = [768, 1024, 1280, 1440, 1920];
+const radii = {
+  small: 4,
+  regular: 8,
+  circle: '50%',
+};
 
 const themeDefault: Theme = {
   name: 'default',
@@ -49,6 +61,9 @@ const themeDefault: Theme = {
   letterSpacings,
   shadows,
   fonts,
+  breakpoints,
+  radii,
+  borders,
 };
 
 export default themeDefault;
