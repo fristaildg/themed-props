@@ -36,7 +36,11 @@ const Box = styled.div`
 Now you can pass [`trascient` props](https://styled-components.com/docs/faqs#transient-props-since-51) to your `Box` component that correspond to the `space` and `color` functions
 
 ```jsx
-<Box $marginTop={1} $paddingY={2} $backgroundColor="primary" />
+<Box
+  $marginTop={1}
+  $paddingY={2}
+  $backgroundColor="primary"
+/>
 ```
 
 The values `1` and `2` are tied specifically to your theme specification of the `spaces` scale, you can also pass any valid css value like `'15px'` or `'1rem'`, though the idea of this library is to leverage your Theme scales and keep your layout consistent rather than passing arbitrary CSS.
@@ -62,8 +66,8 @@ You could also have an array of values `theme.colors.primary`, like
 
 ```js
 colors: {
-    primary: ['#0A2F51', '#137177', '#188977', '#74C67A'],
-  },
+  primary: ['#0A2F51', '#137177', '#188977', '#74C67A'],
+},
 ```
 
 In this case, you would reference any of these values from it's position in the array (starting from 1 instead of 0), like so:
@@ -78,7 +82,40 @@ In this case, you would reference any of these values from it's position in the 
 Themed Props supports styling some pseudo classes, especifically `hover`, `active`, `visited`, `focus`, `focus-within` and `focus-visible`. Just pass the transcient prop that corresponds to the pseudo-class you want to style, an object of nested style transcient props, like so:
 
 ```jsx
-<Component $backgroundColor="primary.1" $hover={{ $backgroundColor: 'primary.2' }} />
+<Component
+  $backgroundColor="primary.1"
+  $hover={{ $backgroundColor: 'primary.2' }}
+/>
 ```
+
+## Responsive styling
+
+```js
+{ breakpoints: [768, 1024], }
+```
+
+To easily apply responsive styling in a mobile-first fashion, you can pass an array of values to any of the transcient props. Each value will be applied in order (from smaller to larger) to each of the breakpoints defined in your theme using the `breakpoints` key (this is the only key which should be mandatorily defined as an array of numbers in order to work). So this:
+```jsx
+<Component $marginX={[2, 4, 6]} />
+```
+will be translated to something like shis:
+```css
+// default styles here (first value of the array)
+margin-top: ...;
+margin-bottom: ...;
+
+@media screen and (min-width: 768px) {
+  // second value of the array
+  margin-top: ...;
+  margin-bottom: ...;
+}
+
+@media screen and (min-width: 1024px) {
+  // third value of the array
+  margin-top: ...;
+  margin-bottom: ...;
+}
+```
+
 
 Made with Love!! ❤️
