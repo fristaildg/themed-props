@@ -1,21 +1,28 @@
 import { css } from 'styled-components';
-import { colorProps } from './color';
-import { spaceProps } from './space';
 import { Theme, ThemedCSSProp } from './types';
-import { setCSS } from './utils';
-import { filterProps, propToCSS } from './utils';
+import { borderFactory, borderFactoryExtra } from './border';
+import { backgroundFactory } from './background';
+import { colorFactory } from './color';
+import { flexboxFactory } from './flexbox';
+import { gridFactory } from './grid';
+import { layoutFactory } from './layout';
+import { positionFactory } from './position';
+import { shadowFactory } from './shadow';
+import { spaceFactory } from './space';
+import { typographyFactory } from './typography';
 
 const cssBlock = (prop: any, theme: Theme) => [
-  filterProps(prop, spaceProps).map(
-    ([key, value]) => `
-            ${propToCSS(key)}: ${setCSS(theme, 'space', value, 'px')};
-          `,
-  ),
-  filterProps(prop, colorProps).map(
-    ([key, value]) => `
-            ${propToCSS(key)}: ${setCSS(theme, 'colors', value)};
-          `,
-  ),
+  ...borderFactory(theme, prop),
+  ...borderFactoryExtra(theme, prop),
+  ...backgroundFactory(theme, prop),
+  ...colorFactory(theme, prop),
+  ...flexboxFactory(theme, prop),
+  ...gridFactory(theme, prop),
+  ...layoutFactory(theme, prop),
+  ...positionFactory(theme, prop),
+  ...shadowFactory(theme, prop),
+  ...spaceFactory(theme, prop),
+  ...typographyFactory(theme, prop),
 ];
 
 export const pseudoClass = css`

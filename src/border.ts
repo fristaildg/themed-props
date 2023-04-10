@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { ThemedCSSProp } from './types';
+import { Theme, ThemedCSSProp } from './types';
 import { generateCSSfromProps, generateCSSRule } from './utils';
 
 export const borderProps = [
@@ -36,42 +36,45 @@ export const borderRadiusProps = [
   '$borderBottomRightRadius',
 ];
 
+export const borderFactory = (theme: Theme, props: any) => [
+  generateCSSfromProps({
+    props,
+    theme,
+    scale: 'borders',
+    scaleProps: borderProps,
+  }),
+  generateCSSfromProps({
+    props,
+    theme,
+    scale: 'colors',
+    scaleProps: borderColorProps,
+  }),
+  generateCSSfromProps({
+    props,
+    theme,
+    scale: 'radii',
+    scaleProps: borderRadiusProps,
+    unit: 'px',
+  }),
+];
+
+export const borderFactoryExtra = (theme: Theme, props: any) => [
+  generateCSSRule({
+    prop: props.$borderX,
+    targetCSS: ['border-left', 'border-right'],
+    theme,
+    scale: 'borders',
+  }),
+  generateCSSRule({
+    prop: props.$borderY,
+    targetCSS: ['border-top', 'border-bottom'],
+    theme,
+    scale: 'borders',
+  }),
+];
+
 export const border = css`
-  ${({ theme, ...props }: ThemedCSSProp) => {
-    return [
-      generateCSSfromProps({
-        props,
-        theme,
-        scale: 'borders',
-        scaleProps: borderProps,
-      }),
-      generateCSSfromProps({
-        props,
-        theme,
-        scale: 'colors',
-        scaleProps: borderColorProps,
-      }),
-      generateCSSfromProps({
-        props,
-        theme,
-        scale: 'radii',
-        scaleProps: borderRadiusProps,
-        unit: 'px',
-      }),
-    ];
-  }}
-  ${({ theme, $borderX, $borderY }: ThemedCSSProp) => [
-    generateCSSRule({
-      prop: $borderX,
-      targetCSS: ['border-left', 'border-right'],
-      theme,
-      scale: 'borders',
-    }),
-    generateCSSRule({
-      prop: $borderY,
-      targetCSS: ['border-top', 'border-bottom'],
-      theme,
-      scale: 'borders',
-    }),
-  ]}
+  ${({ theme, ...props }: ThemedCSSProp) => borderFactory(theme, props)}
+  ${({ theme, $borderX, $borderY }: ThemedCSSProp) =>
+    borderFactoryExtra(theme, { $borderX, $borderY })}
 `;

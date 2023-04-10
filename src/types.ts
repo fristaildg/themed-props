@@ -152,6 +152,16 @@ export type BorderProps = {
     | '$borderLeftStyle']?: string | number | unknown[];
 };
 
+export type PseudoClassProps = {
+  [K in
+    | '$hover'
+    | '$active'
+    | '$visited'
+    | '$focus'
+    | '$focusVisible'
+    | '$focusWithin']?: Record<string, unknown>;
+};
+
 export type ThemedCSSProp = {
   // TODO: fix this any
   [key in string]?: any;

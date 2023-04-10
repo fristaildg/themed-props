@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { ThemedCSSProp } from './types';
+import { Theme, ThemedCSSProp } from './types';
 import { generateCSSfromProps } from './utils';
 
 export const layoutProps = [
@@ -17,14 +17,17 @@ export const layoutProps = [
   '$overflowY',
 ];
 
+export const layoutFactory = (theme: Theme, props: any) =>
+  generateCSSfromProps({
+    props,
+    theme,
+    scale: 'sizes',
+    scaleProps: layoutProps,
+    unit: 'px',
+  });
+
 export const layout = css`
   ${({ theme, ...props }: ThemedCSSProp) => {
-    return generateCSSfromProps({
-      props,
-      theme,
-      scale: 'sizes',
-      scaleProps: layoutProps,
-      unit: 'px',
-    });
+    return layoutFactory(theme, props);
   }}
 `;

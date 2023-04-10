@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { ThemedCSSProp } from './types';
+import { Theme, ThemedCSSProp } from './types';
 import { generateCSSfromProps } from './utils';
 
 export const backgroundProps = [
@@ -10,12 +10,15 @@ export const backgroundProps = [
   '$backgroundRepeat',
 ];
 
+export const backgroundFactory = (theme: Theme, props: any) =>
+  generateCSSfromProps({
+    props,
+    theme,
+    scaleProps: backgroundProps,
+  });
+
 export const background = css`
   ${({ theme, ...props }: ThemedCSSProp) => {
-    return generateCSSfromProps({
-      props,
-      theme,
-      scaleProps: backgroundProps,
-    });
+    return backgroundFactory(theme, props);
   }}
 `;

@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { ThemedCSSProp } from './types';
+import { Theme, ThemedCSSProp } from './types';
 import { generateCSSfromProps, generateCSSRule } from './utils';
 
 export const spaceProps = [
@@ -16,44 +16,50 @@ export const spaceProps = [
   '$gap',
 ];
 
+export const spaceFactory = (theme: Theme, props: any) =>
+  generateCSSfromProps({
+    props,
+    theme,
+    scale: 'space',
+    scaleProps: spaceProps,
+    unit: 'px',
+  });
+
+export const spaceFactoryExtra = (theme: Theme, props: any) => [
+  generateCSSRule({
+    prop: props.$paddingX,
+    targetCSS: ['padding-left', 'padding-right'],
+    theme,
+    scale: 'space',
+    unit: 'px',
+  }),
+  generateCSSRule({
+    prop: props.$paddingY,
+    targetCSS: ['padding-top', 'padding-bottom'],
+    theme,
+    scale: 'space',
+    unit: 'px',
+  }),
+  generateCSSRule({
+    prop: props.$marginX,
+    targetCSS: ['margin-left', 'margin-right'],
+    theme,
+    scale: 'space',
+    unit: 'px',
+  }),
+  generateCSSRule({
+    prop: props.$marginY,
+    targetCSS: ['margin-top', 'margin-bottom'],
+    theme,
+    scale: 'space',
+    unit: 'px',
+  }),
+];
+
 export const space = css`
   ${({ theme, ...props }: ThemedCSSProp) => {
-    return generateCSSfromProps({
-      props,
-      theme,
-      scale: 'space',
-      scaleProps: spaceProps,
-      unit: 'px',
-    });
+    return spaceFactory(theme, props);
   }}
-  ${({ theme, $paddingX, $paddingY, $marginX, $marginY }: ThemedCSSProp) => [
-    generateCSSRule({
-      prop: $paddingX,
-      targetCSS: ['padding-left', 'padding-right'],
-      theme,
-      scale: 'space',
-      unit: 'px',
-    }),
-    generateCSSRule({
-      prop: $paddingY,
-      targetCSS: ['padding-top', 'padding-bottom'],
-      theme,
-      scale: 'space',
-      unit: 'px',
-    }),
-    generateCSSRule({
-      prop: $marginX,
-      targetCSS: ['margin-left', 'margin-right'],
-      theme,
-      scale: 'space',
-      unit: 'px',
-    }),
-    generateCSSRule({
-      prop: $marginY,
-      targetCSS: ['margin-top', 'margin-bottom'],
-      theme,
-      scale: 'space',
-      unit: 'px',
-    }),
-  ]}
+  ${({ theme, $paddingX, $paddingY, $marginX, $marginY }: ThemedCSSProp) =>
+    spaceFactoryExtra(theme, { $marginX, $marginY, $paddingX, $paddingY })}
 `;

@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { ThemedCSSProp } from './types';
+import { Theme, ThemedCSSProp } from './types';
 import { generateCSSfromProps } from './utils';
 
 export const flexboxProps = [
@@ -18,12 +18,15 @@ export const flexboxProps = [
   '$order',
 ];
 
+export const flexboxFactory = (theme: Theme, props: any) =>
+  generateCSSfromProps({
+    props,
+    theme,
+    scaleProps: flexboxProps,
+  });
+
 export const flexbox = css`
   ${({ theme, ...props }: ThemedCSSProp) => {
-    return generateCSSfromProps({
-      props,
-      theme,
-      scaleProps: flexboxProps,
-    });
+    return flexboxFactory(theme, props);
   }}
 `;
