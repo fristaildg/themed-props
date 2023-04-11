@@ -48,4 +48,8 @@ export const pseudoClass = css`
     ${({ theme, $focusWithin }: ThemedCSSProp) =>
       !!$focusWithin && cssBlock($focusWithin, theme)}
   }
+  &:disabled {
+    ${({ theme, $disabled }: ThemedCSSProp) =>
+      !!$disabled && cssBlock($disabled, theme)}
+  }
 `;
