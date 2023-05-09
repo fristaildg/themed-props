@@ -57,9 +57,9 @@ export const spaceFactoryExtra = (theme: Theme, props: any) => [
 ];
 
 export const space = css`
+  ${({ theme, $paddingX, $paddingY, $marginX, $marginY }: ThemedCSSProp) =>
+    spaceFactoryExtra(theme, { $marginX, $marginY, $paddingX, $paddingY })}
   ${({ theme, ...props }: ThemedCSSProp) => {
     return spaceFactory(theme, props);
   }}
-  ${({ theme, $paddingX, $paddingY, $marginX, $marginY }: ThemedCSSProp) =>
-    spaceFactoryExtra(theme, { $marginX, $marginY, $paddingX, $paddingY })}
 `;
