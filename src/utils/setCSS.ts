@@ -25,11 +25,12 @@ export const setCSSFromObject = (
 ) => {
   const [scaleName, scalePositon] = prop.toString().split('.');
 
-  const value = theme[scale][scaleName]
-    ? scalePositon
-      ? (theme[scale][scaleName] as string[])[Number(scalePositon) - 1]
-      : theme[scale][scaleName]
-    : prop;
+  const value =
+    Number.isNaN(+scaleName) && theme[scale][scaleName]
+      ? scalePositon
+        ? (theme[scale][scaleName] as string[])[Number(scalePositon) - 1]
+        : theme[scale][scaleName]
+      : prop;
 
   if (typeof value === 'number') {
     return `${value}px`;
