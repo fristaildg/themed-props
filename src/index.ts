@@ -9,4 +9,6 @@ export { grid } from './grid';
 export { background } from './background';
 export { border } from './border';
 export { pseudoClass } from './pseudoClass';
+export { themeValue } from './themeValue';
+export { themedProps } from './themedProps';
 export * from './types';

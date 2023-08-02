@@ -52,4 +52,8 @@ export const pseudoClass = css`
     ${({ theme, $disabled }: ThemedCSSProp) =>
       !!$disabled && cssBlock($disabled, theme)}
   }
+  &:checked {
+    ${({ theme, $checked }: ThemedCSSProp) =>
+      !!$checked && cssBlock($checked, theme)}
+  }
 `;

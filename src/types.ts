@@ -159,8 +159,22 @@ export type PseudoClassProps = {
     | '$visited'
     | '$focus'
     | '$focusVisible'
-    | '$focusWithin']?: Record<string, unknown>;
+    | '$focusWithin'
+    | '$disabled'
+    | '$checked']?: Record<string, unknown>;
 };
+
+export type ThemedProps = ColorProps &
+  SpaceProps &
+  TypographyProps &
+  LayoutProps &
+  PositionProps &
+  ShadowProps &
+  FlexboxProps &
+  GridProps &
+  BackgroundProps &
+  BorderProps &
+  PseudoClassProps;
 
 export type ThemedCSSProp = {
   // TODO: fix this any

@@ -7,6 +7,13 @@ describe('setCSS', () => {
       expect(setCSS(defaultTheme, 'colors')).toBe(undefined);
     });
   });
+
+  describe('if "prop" is passed', () => {
+    it('should return the corresponding CSS value', () => {
+      expect(setCSS(defaultTheme, 'borders', 'regular')).toBe('1px solid');
+      expect(setCSS(defaultTheme, 'fontWeights', 1)).toBe('200');
+    });
+  });
 });
 
 describe('setCSSFromObject', () => {
